@@ -7,9 +7,9 @@ const AnswerSummary = ({ answers, questions }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg p-6 md:p-8"
+        className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg p-6 md:p-8 text-center"
       >
-        <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+        <h3 className="text-2xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
           Quiz Summary 📝
         </h3>
         
@@ -21,14 +21,14 @@ const AnswerSummary = ({ answers, questions }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-md overflow-hidden"
+              className="bg-white rounded-xl shadow-md overflow-hidden text-center"
             >
               <div className="p-4 bg-gradient-to-r from-indigo-50 to-purple-50">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3 text-center">
                   <span className="font-semibold text-gray-600">
                     #{index + 1}
                   </span>
-                  <h4 className="font-medium text-gray-800">
+                  <h4 className="font-medium text-gray-800 text-center">
                     {question.question}
                   </h4>
                 </div>
@@ -48,22 +48,22 @@ const AnswerSummary = ({ answers, questions }) => {
                     return (
                       <div
                         key={optionIndex}
-                        className={`p-3 rounded-lg border ${bgColor} flex items-center gap-2`}
+                        className={`p-3 rounded-lg border ${bgColor} flex items-center justify-center gap-4 text-center`}
                       >
-                        <span className="font-medium">
+                        <span className="font-medium text-center">
                           {String.fromCharCode(65 + optionIndex)})
                         </span>
-                        <span>{option}</span>
+                        <span className="flex-1 text-center">{option}</span>
                         {isCorrectAnswer && (
-                          <span className="ml-auto text-green-600">✓</span>
+                          <span className="text-green-600">✓</span>
                         )}
                         {isSelectedAnswer && !isCorrectAnswer && (
-                          <span className="ml-auto text-red-600">✗</span>
+                          <span className="text-red-600">✗</span>
                         )}
                       </div>
                     );
                   })}
-                  <div className="mt-4 p-3 bg-indigo-50 rounded-lg">
+                  <div className="mt-4 p-3 bg-indigo-50 rounded-lg text-center">
                     <span className="font-medium text-indigo-800">Fun Fact: </span>
                     <span className="text-gray-700">{question.funFact}</span>
                   </div>

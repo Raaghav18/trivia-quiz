@@ -24,13 +24,13 @@ const QuizCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full"
+      className="w-full text-center"
     >
-      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12">
+      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 text-center">
         <TimerBar onTimeout={onTimeout} />
         
         <div className="text-center mb-4">
-          <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 font-semibold">
+          <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 font-semibold text-center">
             Question {questionNumber} of {totalQuestions}
           </span>
         </div>
@@ -47,21 +47,21 @@ const QuizCard = ({
               disabled={showFeedback}
               whileHover={!showFeedback ? { scale: 1.02, x: 10 } : {}}
               whileTap={!showFeedback ? { scale: 0.98 } : {}}
-              className={`w-full p-6 rounded-2xl border-2 transition-all duration-200
+              className={`w-full p-6 rounded-2xl border-2 transition-all duration-200 text-center
                 ${getOptionClass(option)}
                 ${!showFeedback ? 'hover:shadow-xl cursor-pointer' : ''}
                 disabled:cursor-not-allowed text-lg md:text-xl font-medium`}
             >
-              <div className="flex items-center">
-                <span className="text-2xl font-semibold mr-4 text-indigo-600">
+              <div className="flex items-center justify-center text-center">
+                <span className="text-2xl font-semibold mr-4 text-indigo-600 text-center">
                   {String.fromCharCode(65 + index)}) 
                 </span>
-                <span className="flex-1">{option}</span>
+                <span className="text-center">{option}</span>
                 {showFeedback && option === correctAnswer && (
-                  <span className="text-green-600 ml-2">✓</span>
+                  <span className="text-green-600 ml-4">✓</span>
                 )}
                 {showFeedback && option === selectedAnswer && option !== correctAnswer && (
-                  <span className="text-red-600 ml-2">✗</span>
+                  <span className="text-red-600 ml-4">✗</span>
                 )}
               </div>
             </motion.button>
