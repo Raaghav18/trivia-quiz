@@ -40,6 +40,7 @@ function App() {
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [currentQuestions, setCurrentQuestions] = useState([])
   const [totalQuestionsInDB, setTotalQuestionsInDB] = useState(0)
+  const [userAnswers, setUserAnswers] = useState([])
 
   useEffect(() => {
     // Load scores and games played when component mounts
@@ -56,6 +57,7 @@ function App() {
     setCorrectAnswers(0);
     setShowFeedback(false);
     setSelectedAnswer(null);
+    setUserAnswers([]);
   };
 
   const handleStartQuiz = () => {
@@ -85,6 +87,13 @@ function App() {
       setCorrectAnswers(prev => prev + 1)
     }
 
+    // Update user answers array
+    setUserAnswers(prev => {
+      const newAnswers = [...prev];
+      newAnswers[currentQuestionIndex] = answer;
+      return newAnswers;
+    });
+
     setTimeout(() => {
       if (currentQuestionIndex < currentQuestions.length - 1) {
         setCurrentQuestionIndex(prev => prev + 1)
@@ -106,6 +115,13 @@ function App() {
   const handleTimeout = () => {
     if (!showFeedback) {
       setShowFeedback(true)
+      
+      // Update user answers array with no answer
+      setUserAnswers(prev => {
+        const newAnswers = [...prev];
+        newAnswers[currentQuestionIndex] = null;
+        return newAnswers;
+      });
       
       setTimeout(() => {
         if (currentQuestionIndex < currentQuestions.length - 1) {
@@ -202,9 +218,7 @@ function App() {
               onReturnHome={handleReturnHome}
             />
             <AnswerSummary
-              answers={Array(currentQuestions.length).fill(null).map((_, i) => 
-                i === currentQuestionIndex ? selectedAnswer : null
-              )}
+              answers={userAnswers}
               questions={currentQuestions}
             />
           </div>
