@@ -6,6 +6,7 @@ import Leaderboard from './components/Leaderboard'
 import AnswerSummary from './components/AnswerSummary'
 import { getRandomQuestions, getTotalQuestions } from './services/questionService'
 import './App.css'
+import './styles.css'
 
 // Function to get scores from localStorage
 const getStoredScores = () => {
@@ -143,17 +144,17 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center p-4">
+    <div className="app-container">
       {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      <div className="animated-background">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/30 via-violet-500/30 to-fuchsia-500/30 animate-pulse"></div>
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-cyan-500/30 to-transparent rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-violet-500/30 to-transparent rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 w-full h-full bg-gradient-to-br from-fuchsia-500/30 to-transparent rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        <div className="blob-animation -top-1/2 -left-1/2 from-cyan-500/30 to-transparent"></div>
+        <div className="blob-animation -bottom-1/2 -right-1/2 from-violet-500/30 to-transparent animation-delay-2000"></div>
+        <div className="blob-animation top-1/2 left-1/2 from-fuchsia-500/30 to-transparent animation-delay-4000"></div>
       </div>
 
-      <div className="w-full min-h-screen flex items-center justify-center py-8">
-        <div className="w-full max-w-2xl mx-auto relative z-10 flex flex-col items-center justify-center">
+      <div className="flex-end-container w-full">
+        <div className="content-container">
           <AnimatePresence mode="wait">
             {gameState === 'start' && (
               <motion.div
@@ -161,35 +162,35 @@ function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 w-full flex flex-col items-center justify-center"
+                className="card-container text-alignment"
               >
                 <motion.h1 
-                  className="text-5xl md:text-6xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
+                  className="main-heading"
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5 }}
                 >
                   Trivia Time!
                 </motion.h1>
-                <p className="text-gray-600 mb-8 text-xl leading-relaxed text-center">
+                <p className="score-text mb-8">
                   Test your knowledge with 10 random questions from our pool of {totalQuestionsInDB} trivia questions! 
                   You have 15 seconds per question. Get ready to challenge yourself!
                 </p>
 
-                <Leaderboard 
-                  scores={topScores} 
-                  gamesPlayed={gamesPlayed}
-                  onReset={handleResetStats}
-                />
+                <div className="w-full">
+                  <Leaderboard 
+                    scores={topScores} 
+                    gamesPlayed={gamesPlayed}
+                    onReset={handleResetStats}
+                  />
+                </div>
 
-                <div className="flex justify-center mt-8">
+                <div className="button-container mt-8">
                   <motion.button
                     onClick={handleStartQuiz}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
-                      text-white font-bold text-xl py-5 px-10 rounded-2xl
-                      transition-all duration-200 shadow-lg hover:shadow-xl"
+                    className="primary-button"
                   >
                     Start Quiz
                   </motion.button>
@@ -198,33 +199,37 @@ function App() {
             )}
 
             {gameState === 'playing' && currentQuestions.length > 0 && (
-              <QuizCard
-                key={currentQuestionIndex}
-                question={currentQuestions[currentQuestionIndex].question}
-                questionNumber={currentQuestionIndex + 1}
-                totalQuestions={currentQuestions.length}
-                options={currentQuestions[currentQuestionIndex].options}
-                onAnswer={handleAnswer}
-                showFeedback={showFeedback}
-                selectedAnswer={selectedAnswer}
-                correctAnswer={currentQuestions[currentQuestionIndex].correctAnswer}
-                onTimeout={handleTimeout}
-              />
+              <div className="w-full text-alignment">
+                <QuizCard
+                  key={currentQuestionIndex}
+                  question={currentQuestions[currentQuestionIndex].question}
+                  questionNumber={currentQuestionIndex + 1}
+                  totalQuestions={currentQuestions.length}
+                  options={currentQuestions[currentQuestionIndex].options}
+                  onAnswer={handleAnswer}
+                  showFeedback={showFeedback}
+                  selectedAnswer={selectedAnswer}
+                  correctAnswer={currentQuestions[currentQuestionIndex].correctAnswer}
+                  onTimeout={handleTimeout}
+                />
+              </div>
             )}
 
             {gameState === 'end' && (
-              <div className="space-y-8 w-full flex flex-col items-center justify-center">
-                <ScoreSummary
-                  score={score}
-                  correctAnswers={correctAnswers}
-                  totalQuestions={currentQuestions.length}
-                  onRestart={handleStartQuiz}
-                  onReturnHome={handleReturnHome}
-                />
-                <AnswerSummary
-                  answers={userAnswers}
-                  questions={currentQuestions}
-                />
+              <div className="w-full text-alignment">
+                <div className="space-y-8">
+                  <ScoreSummary
+                    score={score}
+                    correctAnswers={correctAnswers}
+                    totalQuestions={currentQuestions.length}
+                    onRestart={handleStartQuiz}
+                    onReturnHome={handleReturnHome}
+                  />
+                  <AnswerSummary
+                    answers={userAnswers}
+                    questions={currentQuestions}
+                  />
+                </div>
               </div>
             )}
           </AnimatePresence>

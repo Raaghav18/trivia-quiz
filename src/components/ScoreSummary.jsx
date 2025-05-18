@@ -17,12 +17,12 @@ const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onRetu
       animate={{ opacity: 1, scale: 1 }}
       className="w-full"
     >
-      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12">
-        <div className="text-center">
+      <div className="card-container">
+        <div className="text-alignment">
           <motion.h2 
             initial={{ y: -20 }}
             animate={{ y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-8"
+            className="section-heading mb-8"
           >
             Quiz Complete!
           </motion.h2>
@@ -32,12 +32,12 @@ const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onRetu
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500"
+              className="score-value"
             >
               {score} pts
             </motion.div>
             
-            <div className="text-xl md:text-2xl text-gray-700">
+            <div className="score-text">
               You got <span className="font-semibold text-indigo-600">{correctAnswers}</span> out of{" "}
               <span className="font-semibold text-purple-600">{totalQuestions}</span> questions right!
             </div>
@@ -46,20 +46,18 @@ const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onRetu
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-600 italic"
+              className="score-text italic"
             >
               {getEncouragingMessage(score, totalQuestions)}
             </motion.p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="button-container">
             <motion.button
               onClick={onRestart}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
-                text-white font-bold text-xl py-5 px-10 rounded-2xl
-                transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="primary-button"
             >
               Play Again
             </motion.button>
@@ -68,9 +66,7 @@ const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onRetu
               onClick={onReturnHome}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 
-                text-white font-bold text-xl py-5 px-10 rounded-2xl
-                transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="secondary-button"
             >
               Return Home
             </motion.button>
