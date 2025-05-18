@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "Geography",
+      "question": "What is the capital of France?",
+      "options": ["London", "Berlin", "Paris", "Madrid"],
+      "correctAnswer": "Paris",
+      "funFact": "Paris has been France's capital since 508 CE and is known as the 'City of Light'."
+    },
+    {
+      "id": 2,
+      "category": "Science",
+      "question": "Which planet is known as the Red Planet?",
+      "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+      "correctAnswer": "Mars",
+      "funFact": "Mars appears red because of iron oxide (rust) on its surface!"
+    },
+    {
+      "id": 3,
+      "category": "Art",
+      "question": "Who painted the Mona Lisa?",
+      "options": ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Michelangelo"],
+      "correctAnswer": "Leonardo da Vinci",
+      "funFact": "The Mona Lisa has no visible eyebrows or eyelashes!"
+    },
+    {
+      "id": 4,
+      "category": "Science",
+      "question": "What is the largest mammal in the world?",
+      "options": ["African Elephant", "Blue Whale", "Giraffe", "Polar Bear"],
+      "correctAnswer": "Blue Whale",
+      "funFact": "A blue whale's heart is so big that a human could swim through its arteries!"
+    },
+    {
+      "id": 5,
+      "category": "Science",
+      "question": "Which element has the chemical symbol 'Au'?",
+      "options": ["Silver", "Gold", "Copper", "Aluminum"],
+      "correctAnswer": "Gold",
+      "funFact": "The symbol Au comes from the Latin word for gold, 'aurum'."
+    },
+    {
+      "id": 6,
+      "category": "Technology",
+      "question": "Which programming language was created by Guido van Rossum?",
+      "options": ["Java", "Python", "Ruby", "PHP"],
+      "correctAnswer": "Python",
+      "funFact": "Python was named after the British comedy group Monty Python, not the snake!"
+    },
+    {
+      "id": 7,
+      "category": "Geography",
+      "question": "What is the smallest country in the world?",
+      "options": ["Monaco", "Vatican City", "San Marino", "Liechtenstein"],
+      "correctAnswer": "Vatican City",
+      "funFact": "Vatican City is only 0.44 square kilometers in size!"
+    },
+    {
+      "id": 8,
+      "category": "Technology",
+      "question": "In which year did the first iPhone release?",
+      "options": ["2005", "2006", "2007", "2008"],
+      "correctAnswer": "2007",
+      "funFact": "The original iPhone had no App Store - it wasn't introduced until 2008!"
+    },
+    {
+      "id": 9,
+      "category": "Language",
+      "question": "What is the most spoken language in the world?",
+      "options": ["English", "Spanish", "Mandarin", "Hindi"],
+      "correctAnswer": "Mandarin",
+      "funFact": "Mandarin has over 1.1 billion speakers worldwide!"
+    },
+    {
+      "id": 10,
+      "category": "Gaming",
+      "question": "Which video game console is the best-selling of all time?",
+      "options": ["PlayStation 2", "Nintendo DS", "Xbox 360", "Wii"],
+      "correctAnswer": "PlayStation 2",
+      "funFact": "The PS2 sold over 155 million units worldwide!"
+    },
+    {
+      "id": 11,
+      "category": "Science",
+      "question": "What is the chemical formula for table salt?",
+      "options": ["NaCl", "H2O", "CO2", "CaCO3"],
+      "correctAnswer": "NaCl",
+      "funFact": "The word 'salary' comes from salt, as Roman soldiers were paid with it!"
+    },
+    {
+      "id": 12,
+      "category": "Literature",
+      "question": "Who wrote 'Romeo and Juliet'?",
+      "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+      "correctAnswer": "William Shakespeare",
+      "funFact": "The play was written between 1591 and 1595, early in Shakespeare's career!"
+    },
+    {
+      "id": 13,
+      "category": "Science",
+      "question": "What is the fastest land animal?",
+      "options": ["Lion", "Cheetah", "Gazelle", "Antelope"],
+      "correctAnswer": "Cheetah",
+      "funFact": "Cheetahs can reach speeds of up to 70 mph (112 km/h)!"
+    },
+    {
+      "id": 14,
+      "category": "Technology",
+      "question": "Which company developed the first successful web browser?",
+      "options": ["Microsoft", "Apple", "Netscape", "Google"],
+      "correctAnswer": "Netscape",
+      "funFact": "Netscape Navigator was released in 1994 and dominated the browser market in the early web!"
+    },
+    {
+      "id": 15,
+      "category": "Science",
+      "question": "What percentage of the human body is water?",
+      "options": ["50%", "60%", "70%", "80%"],
+      "correctAnswer": "60%",
+      "funFact": "The percentage varies by age, with babies having a higher percentage than adults!"
+    },
+    {
+      "id": 16,
+      "category": "History",
+      "question": "In which year did World War II end?",
+      "options": ["1943", "1944", "1945", "1946"],
+      "correctAnswer": "1945",
+      "funFact": "The war officially ended on September 2, 1945, with Japan's formal surrender."
+    },
+    {
+      "id": 17,
+      "category": "Sports",
+      "question": "Which country has won the most FIFA World Cup tournaments?",
+      "options": ["Germany", "Argentina", "Brazil", "Italy"],
+      "correctAnswer": "Brazil",
+      "funFact": "Brazil has won the World Cup 5 times, in 1958, 1962, 1970, 1994, and 2002!"
+    },
+    {
+      "id": 18,
+      "category": "Music",
+      "question": "Which band released the album 'Abbey Road'?",
+      "options": ["The Rolling Stones", "The Beatles", "The Who", "Pink Floyd"],
+      "correctAnswer": "The Beatles",
+      "funFact": "The album's cover features the famous zebra crossing outside Abbey Road Studios!"
+    },
+    {
+      "id": 19,
+      "category": "Food",
+      "question": "Which country invented pizza?",
+      "options": ["Greece", "Italy", "France", "Spain"],
+      "correctAnswer": "Italy",
+      "funFact": "The first modern pizza was created in Naples in the late 18th century!"
+    },
+    {
+      "id": 20,
+      "category": "Movies",
+      "question": "What was the first feature-length animated movie?",
+      "options": ["Pinocchio", "Snow White", "Bambi", "Fantasia"],
+      "correctAnswer": "Snow White",
+      "funFact": "Snow White and the Seven Dwarfs was released in 1937 by Disney!"
+    }
+  ]
+} 
