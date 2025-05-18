@@ -143,17 +143,17 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center">
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/30 via-violet-500/30 to-fuchsia-500/30 animate-pulse"></div>
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-cyan-500/30 to-transparent rounded-full blur-3xl animate-blob"></div>
         <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-violet-500/30 to-transparent rounded-full blur-3xl animate-blob animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/2 w-full h-full bg-gradient-to-br from-fuchsia-500/30 to-transparent rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="w-full flex items-center justify-center">
-        <div className="container max-w-4xl mx-auto px-4 relative z-10">
+      <div className="w-full min-h-screen flex items-center justify-center py-8 px-4">
+        <div className="w-full max-w-2xl relative z-10">
           <AnimatePresence mode="wait">
             {gameState === 'start' && (
               <motion.div
@@ -161,17 +161,17 @@ function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 w-full text-center"
+                className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 w-full"
               >
                 <motion.h1 
-                  className="text-5xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
+                  className="text-5xl md:text-6xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5 }}
                 >
                   Trivia Time!
                 </motion.h1>
-                <p className="text-gray-600 mb-8 text-xl leading-relaxed">
+                <p className="text-gray-600 mb-8 text-xl leading-relaxed text-center">
                   Test your knowledge with 10 random questions from our pool of {totalQuestionsInDB} trivia questions! 
                   You have 15 seconds per question. Get ready to challenge yourself!
                 </p>
@@ -182,7 +182,7 @@ function App() {
                   onReset={handleResetStats}
                 />
 
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-8">
                   <motion.button
                     onClick={handleStartQuiz}
                     whileHover={{ scale: 1.05 }}
@@ -198,24 +198,22 @@ function App() {
             )}
 
             {gameState === 'playing' && currentQuestions.length > 0 && (
-              <div className="flex justify-center w-full">
-                <QuizCard
-                  key={currentQuestionIndex}
-                  question={currentQuestions[currentQuestionIndex].question}
-                  questionNumber={currentQuestionIndex + 1}
-                  totalQuestions={currentQuestions.length}
-                  options={currentQuestions[currentQuestionIndex].options}
-                  onAnswer={handleAnswer}
-                  showFeedback={showFeedback}
-                  selectedAnswer={selectedAnswer}
-                  correctAnswer={currentQuestions[currentQuestionIndex].correctAnswer}
-                  onTimeout={handleTimeout}
-                />
-              </div>
+              <QuizCard
+                key={currentQuestionIndex}
+                question={currentQuestions[currentQuestionIndex].question}
+                questionNumber={currentQuestionIndex + 1}
+                totalQuestions={currentQuestions.length}
+                options={currentQuestions[currentQuestionIndex].options}
+                onAnswer={handleAnswer}
+                showFeedback={showFeedback}
+                selectedAnswer={selectedAnswer}
+                correctAnswer={currentQuestions[currentQuestionIndex].correctAnswer}
+                onTimeout={handleTimeout}
+              />
             )}
 
             {gameState === 'end' && (
-              <div className="flex flex-col items-center w-full">
+              <div className="space-y-8">
                 <ScoreSummary
                   score={score}
                   correctAnswers={correctAnswers}

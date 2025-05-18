@@ -24,18 +24,18 @@ const QuizCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full max-w-2xl mx-auto"
+      className="w-full"
     >
-      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 text-center">
+      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12">
         <TimerBar onTimeout={onTimeout} />
         
-        <div className="flex justify-center mb-4">
+        <div className="text-center mb-4">
           <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 font-semibold">
             Question {questionNumber} of {totalQuestions}
           </span>
         </div>
         
-        <h2 className="text-3xl md:text-4xl font-bold mt-8 mb-12 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+        <h2 className="text-3xl md:text-4xl font-bold mt-8 mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
           {question}
         </h2>
 
@@ -47,7 +47,7 @@ const QuizCard = ({
               disabled={showFeedback}
               whileHover={!showFeedback ? { scale: 1.02, x: 10 } : {}}
               whileTap={!showFeedback ? { scale: 0.98 } : {}}
-              className={`w-full p-6 text-left rounded-2xl border-2 transition-all duration-200
+              className={`w-full p-6 rounded-2xl border-2 transition-all duration-200
                 ${getOptionClass(option)}
                 ${!showFeedback ? 'hover:shadow-xl cursor-pointer' : ''}
                 disabled:cursor-not-allowed text-lg md:text-xl font-medium`}
@@ -56,7 +56,13 @@ const QuizCard = ({
                 <span className="text-2xl font-semibold mr-4 text-indigo-600">
                   {String.fromCharCode(65 + index)}) 
                 </span>
-                {option}
+                <span className="flex-1">{option}</span>
+                {showFeedback && option === correctAnswer && (
+                  <span className="text-green-600 ml-2">✓</span>
+                )}
+                {showFeedback && option === selectedAnswer && option !== correctAnswer && (
+                  <span className="text-red-600 ml-2">✗</span>
+                )}
               </div>
             </motion.button>
           ))}
