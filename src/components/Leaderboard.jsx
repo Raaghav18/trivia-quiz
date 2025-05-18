@@ -5,12 +5,10 @@ const Leaderboard = ({ scores, gamesPlayed, onReset }) => {
 
   return (
     <div className="w-full mt-8 mb-12 text-alignment">
-      <div className="flex-end-container mb-6">
-        <div className="w-full text-alignment">
-          <h2 className="section-heading">
-            Stats 📊
-          </h2>
-        </div>
+      <div className="stats-container">
+        <h2 className="stats-heading">
+          Stats 📊
+        </h2>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
