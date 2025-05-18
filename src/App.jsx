@@ -143,7 +143,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/30 via-violet-500/30 to-fuchsia-500/30 animate-pulse"></div>
@@ -152,7 +152,7 @@ function App() {
         <div className="absolute top-1/2 left-1/2 w-full h-full bg-gradient-to-br from-fuchsia-500/30 to-transparent rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="relative w-full max-w-7xl mx-auto">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <AnimatePresence mode="wait">
           {gameState === 'start' && (
             <motion.div
@@ -160,17 +160,17 @@ function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl w-full mx-auto text-center relative"
+              className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl mx-auto"
             >
               <motion.h1 
-                className="text-5xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
+                className="text-5xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 text-center"
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5 }}
               >
                 Trivia Time!
               </motion.h1>
-              <p className="text-gray-600 mb-8 text-xl leading-relaxed">
+              <p className="text-gray-600 mb-8 text-xl leading-relaxed text-center">
                 Test your knowledge with 10 random questions from our pool of {totalQuestionsInDB} trivia questions! 
                 You have 15 seconds per question. Get ready to challenge yourself!
               </p>
@@ -187,7 +187,7 @@ function App() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
                   text-white font-bold text-xl py-5 px-10 rounded-2xl
-                  transition-all duration-200 shadow-lg hover:shadow-xl"
+                  transition-all duration-200 shadow-lg hover:shadow-xl mx-auto block"
               >
                 Start Quiz
               </motion.button>
@@ -210,7 +210,7 @@ function App() {
           )}
 
           {gameState === 'end' && (
-            <div className="w-full max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <ScoreSummary
                 score={score}
                 correctAnswers={correctAnswers}
