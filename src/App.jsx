@@ -152,79 +152,85 @@ function App() {
         <div className="absolute top-1/2 left-1/2 w-full h-full bg-gradient-to-br from-fuchsia-500/30 to-transparent rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
-        <AnimatePresence mode="wait">
-          {gameState === 'start' && (
-            <motion.div
-              key="start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl mx-auto"
-            >
-              <motion.h1 
-                className="text-5xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 text-center"
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5 }}
+      <div className="w-full flex items-center justify-center">
+        <div className="container max-w-4xl mx-auto px-4 relative z-10">
+          <AnimatePresence mode="wait">
+            {gameState === 'start' && (
+              <motion.div
+                key="start"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 w-full text-center"
               >
-                Trivia Time!
-              </motion.h1>
-              <p className="text-gray-600 mb-8 text-xl leading-relaxed text-center">
-                Test your knowledge with 10 random questions from our pool of {totalQuestionsInDB} trivia questions! 
-                You have 15 seconds per question. Get ready to challenge yourself!
-              </p>
+                <motion.h1 
+                  className="text-5xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Trivia Time!
+                </motion.h1>
+                <p className="text-gray-600 mb-8 text-xl leading-relaxed">
+                  Test your knowledge with 10 random questions from our pool of {totalQuestionsInDB} trivia questions! 
+                  You have 15 seconds per question. Get ready to challenge yourself!
+                </p>
 
-              <Leaderboard 
-                scores={topScores} 
-                gamesPlayed={gamesPlayed}
-                onReset={handleResetStats}
-              />
+                <Leaderboard 
+                  scores={topScores} 
+                  gamesPlayed={gamesPlayed}
+                  onReset={handleResetStats}
+                />
 
-              <motion.button
-                onClick={handleStartQuiz}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
-                  text-white font-bold text-xl py-5 px-10 rounded-2xl
-                  transition-all duration-200 shadow-lg hover:shadow-xl mx-auto block"
-              >
-                Start Quiz
-              </motion.button>
-            </motion.div>
-          )}
+                <div className="flex justify-center">
+                  <motion.button
+                    onClick={handleStartQuiz}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
+                      text-white font-bold text-xl py-5 px-10 rounded-2xl
+                      transition-all duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    Start Quiz
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
 
-          {gameState === 'playing' && currentQuestions.length > 0 && (
-            <QuizCard
-              key={currentQuestionIndex}
-              question={currentQuestions[currentQuestionIndex].question}
-              questionNumber={currentQuestionIndex + 1}
-              totalQuestions={currentQuestions.length}
-              options={currentQuestions[currentQuestionIndex].options}
-              onAnswer={handleAnswer}
-              showFeedback={showFeedback}
-              selectedAnswer={selectedAnswer}
-              correctAnswer={currentQuestions[currentQuestionIndex].correctAnswer}
-              onTimeout={handleTimeout}
-            />
-          )}
+            {gameState === 'playing' && currentQuestions.length > 0 && (
+              <div className="flex justify-center w-full">
+                <QuizCard
+                  key={currentQuestionIndex}
+                  question={currentQuestions[currentQuestionIndex].question}
+                  questionNumber={currentQuestionIndex + 1}
+                  totalQuestions={currentQuestions.length}
+                  options={currentQuestions[currentQuestionIndex].options}
+                  onAnswer={handleAnswer}
+                  showFeedback={showFeedback}
+                  selectedAnswer={selectedAnswer}
+                  correctAnswer={currentQuestions[currentQuestionIndex].correctAnswer}
+                  onTimeout={handleTimeout}
+                />
+              </div>
+            )}
 
-          {gameState === 'end' && (
-            <div className="max-w-4xl mx-auto">
-              <ScoreSummary
-                score={score}
-                correctAnswers={correctAnswers}
-                totalQuestions={currentQuestions.length}
-                onRestart={handleStartQuiz}
-                onReturnHome={handleReturnHome}
-              />
-              <AnswerSummary
-                answers={userAnswers}
-                questions={currentQuestions}
-              />
-            </div>
-          )}
-        </AnimatePresence>
+            {gameState === 'end' && (
+              <div className="flex flex-col items-center w-full">
+                <ScoreSummary
+                  score={score}
+                  correctAnswers={correctAnswers}
+                  totalQuestions={currentQuestions.length}
+                  onRestart={handleStartQuiz}
+                  onReturnHome={handleReturnHome}
+                />
+                <AnswerSummary
+                  answers={userAnswers}
+                  questions={currentQuestions}
+                />
+              </div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   )

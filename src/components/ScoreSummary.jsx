@@ -15,7 +15,7 @@ const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onRetu
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="w-full max-w-4xl mx-auto px-4"
+      className="w-full"
     >
       <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 text-center">
         <motion.h2 

@@ -24,22 +24,22 @@ const QuizCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full max-w-4xl mx-auto px-4 py-8"
+      className="w-full max-w-2xl mx-auto"
     >
-      <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 md:p-12">
+      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 text-center">
         <TimerBar onTimeout={onTimeout} />
         
-        <div className="text-center mb-4">
+        <div className="flex justify-center mb-4">
           <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 font-semibold">
             Question {questionNumber} of {totalQuestions}
           </span>
         </div>
         
-        <h2 className="text-3xl md:text-4xl font-bold mt-8 mb-12 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mt-8 mb-12 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
           {question}
         </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {options.map((option, index) => (
             <motion.button
               key={index}
