@@ -10,68 +10,35 @@ const getEncouragingMessage = (score, totalQuestions) => {
   return "Hey, every expert was once a beginner! Try again! 💪";
 };
 
-const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onReturnHome }) => {
+const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onReturnHome, username }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="w-full"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="card-container text-alignment"
     >
-      <div className="card-container">
-        <div className="text-alignment">
-          <motion.h2 
-            initial={{ y: -20 }}
-            animate={{ y: 0 }}
-            className="section-heading mb-8"
-          >
-            Quiz Complete!
-          </motion.h2>
-          
-          <div className="space-y-6 mb-12">
-            <motion.div 
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="score-value"
-            >
-              {score} pts
-            </motion.div>
-            
-            <div className="score-text">
-              You got <span className="font-semibold text-indigo-600">{correctAnswers}</span> out of{" "}
-              <span className="font-semibold text-purple-600">{totalQuestions}</span> questions right!
-            </div>
-
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="score-text italic"
-            >
-              {getEncouragingMessage(score, totalQuestions)}
-            </motion.p>
-          </div>
-
-          <div className="button-container">
-            <motion.button
-              onClick={onRestart}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="primary-button"
-            >
-              Play Again
-            </motion.button>
-
-            <motion.button
-              onClick={onReturnHome}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="secondary-button"
-            >
-              Return Home
-            </motion.button>
-          </div>
-        </div>
+      <h2 className="main-heading mb-4">Quiz Complete!</h2>
+      <p className="score-text mb-2">Great job, {username}!</p>
+      <p className="score-text mb-8">
+        You scored {score} points with {correctAnswers} correct answers out of {totalQuestions} questions.
+      </p>
+      <div className="button-container space-x-4">
+        <motion.button
+          onClick={onRestart}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="primary-button"
+        >
+          Try Again
+        </motion.button>
+        <motion.button
+          onClick={onReturnHome}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="secondary-button"
+        >
+          Return Home
+        </motion.button>
       </div>
     </motion.div>
   );

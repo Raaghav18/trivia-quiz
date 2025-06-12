@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { auth } from './config/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 import QuizCard from './components/QuizCard'
 import ScoreSummary from './components/ScoreSummary'
 import Leaderboard from './components/Leaderboard'
 import AnswerSummary from './components/AnswerSummary'
+import Auth from './components/Auth'
 import { getRandomQuestions, getTotalQuestions } from './services/questionService'
+import { updateHighScore } from './services/scoreService'
 import './App.css'
 import './styles.css'
 
@@ -31,7 +35,7 @@ const saveScore = (newScore) => {
 };
 
 function App() {
-  const [gameState, setGameState] = useState('start') // 'start', 'playing', 'end'
+  const [gameState, setGameState] = useState('start') // 'start', 'auth', 'playing', 'end'
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [correctAnswers, setCorrectAnswers] = useState(0)
@@ -42,12 +46,20 @@ function App() {
   const [currentQuestions, setCurrentQuestions] = useState([])
   const [totalQuestionsInDB, setTotalQuestionsInDB] = useState(0)
   const [userAnswers, setUserAnswers] = useState([])
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     // Load scores and games played when component mounts
     setTopScores(getStoredScores());
     setGamesPlayed(getGamesPlayed());
     setTotalQuestionsInDB(getTotalQuestions());
+
+    // Set up auth state listener
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const resetGame = () => {
@@ -62,6 +74,15 @@ function App() {
   };
 
   const handleStartQuiz = () => {
+    if (user) {
+      resetGame();
+      setGameState('playing');
+    } else {
+      setGameState('auth');
+    }
+  };
+
+  const handleAuthSuccess = () => {
     resetGame();
     setGameState('playing');
   };
@@ -78,7 +99,7 @@ function App() {
     setGamesPlayed(0);
   };
 
-  const handleAnswer = (answer) => {
+  const handleAnswer = async (answer) => {
     setSelectedAnswer(answer)
     setShowFeedback(true)
     
@@ -95,25 +116,35 @@ function App() {
       return newAnswers;
     });
 
-    setTimeout(() => {
+    setTimeout(async () => {
       if (currentQuestionIndex < currentQuestions.length - 1) {
         setCurrentQuestionIndex(prev => prev + 1)
         setShowFeedback(false)
         setSelectedAnswer(null)
       } else {
-        const finalScore = { score: score + (isCorrect ? 10 : 0), correctAnswers: correctAnswers + (isCorrect ? 1 : 0) };
-        const newTopScores = saveScore(finalScore);
+        const finalScore = score + (isCorrect ? 10 : 0);
+        const finalCorrectAnswers = correctAnswers + (isCorrect ? 1 : 0);
+        
+        // Update high score in Firestore if user is logged in
+        if (user) {
+          await updateHighScore(user.uid, finalScore);
+        }
+        
+        // Update local storage
+        const newTopScores = saveScore({ score: finalScore, correctAnswers: finalCorrectAnswers });
         setTopScores(newTopScores);
+        
         // Increment games played
         const newGamesPlayed = gamesPlayed + 1;
         localStorage.setItem('gamesPlayed', newGamesPlayed.toString());
         setGamesPlayed(newGamesPlayed);
+        
         setGameState('end')
       }
     }, 1500)
   }
 
-  const handleTimeout = () => {
+  const handleTimeout = async () => {
     if (!showFeedback) {
       setShowFeedback(true)
       
@@ -124,19 +155,26 @@ function App() {
         return newAnswers;
       });
       
-      setTimeout(() => {
+      setTimeout(async () => {
         if (currentQuestionIndex < currentQuestions.length - 1) {
           setCurrentQuestionIndex(prev => prev + 1)
           setShowFeedback(false)
           setSelectedAnswer(null)
         } else {
-          const finalScore = { score, correctAnswers };
-          const newTopScores = saveScore(finalScore);
+          // Update high score in Firestore if user is logged in
+          if (user) {
+            await updateHighScore(user.uid, score);
+          }
+          
+          // Update local storage
+          const newTopScores = saveScore({ score, correctAnswers });
           setTopScores(newTopScores);
+          
           // Increment games played
           const newGamesPlayed = gamesPlayed + 1;
           localStorage.setItem('gamesPlayed', newGamesPlayed.toString());
           setGamesPlayed(newGamesPlayed);
+          
           setGameState('end')
         }
       }, 1500)
@@ -192,14 +230,21 @@ function App() {
                     whileTap={{ scale: 0.95 }}
                     className="primary-button"
                   >
-                    Start Quiz
+                    {user ? 'Start Quiz' : 'Login to Start'}
                   </motion.button>
                 </div>
               </motion.div>
             )}
 
+            {gameState === 'auth' && (
+              <Auth onAuthSuccess={handleAuthSuccess} />
+            )}
+
             {gameState === 'playing' && currentQuestions.length > 0 && (
               <div className="w-full text-alignment">
+                <h2 className="text-2xl font-bold mb-6 text-white">
+                  Welcome, {user?.displayName || 'Player'}!
+                </h2>
                 <QuizCard
                   key={currentQuestionIndex}
                   question={currentQuestions[currentQuestionIndex].question}
@@ -224,6 +269,7 @@ function App() {
                     totalQuestions={currentQuestions.length}
                     onRestart={handleStartQuiz}
                     onReturnHome={handleReturnHome}
+                    username={user?.displayName || 'Player'}
                   />
                   <AnswerSummary
                     answers={userAnswers}
