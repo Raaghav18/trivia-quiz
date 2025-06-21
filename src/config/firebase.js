@@ -2,20 +2,27 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Replace these values with your Firebase project configuration
-// You can find these values in your Firebase Console:
-// 1. Go to Project Settings (gear icon)
-// 2. Scroll down to "Your apps"
-// 3. Under the web app configuration, you'll find these values
+// Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAjrw6DH5EMWAExQWHpeWjTMt0vG4ZY2B4",
+  authDomain: "trivia-37541.firebaseapp.com",
+  projectId: "trivia-37541",
+  storageBucket: "trivia-37541.firebasestorage.app",
+  messagingSenderId: "818907290034",
+  appId: "1:818907290034:web:0e1c50731d167ce7adacab"
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app); 
+// Initialize Firebase
+let app, auth, db;
+
+try {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  console.log('Firebase initialized successfully');
+} catch (error) {
+  console.error('Error initializing Firebase:', error);
+  console.error('Please check your Firebase configuration and ensure your project is properly set up.');
+}
+
+export { auth, db }; 
