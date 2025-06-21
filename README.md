@@ -62,6 +62,23 @@ A modern, interactive trivia quiz application built with React and Tailwind CSS.
 4. View your final score and review incorrect answers
 5. Try to beat your high score!
 
+## Deployment
+
+This app is automatically deployed to GitHub Pages using GitHub Actions. The deployment process:
+
+1. **Automatic Deployment**: Every push to the `master` branch triggers a deployment
+2. **Build Process**: The app is built using Vite and optimized for production
+3. **Live Site**: Available at [https://Raaghav18.github.io/trivia-quiz](https://Raaghav18.github.io/trivia-quiz)
+
+### Manual Deployment
+If you need to deploy manually:
+```bash
+npm run deploy
+```
+
+### Deployment Status
+You can check the deployment status in the [Actions tab](https://github.com/Raaghav18/trivia-quiz/actions) of your repository.
+
 ## Contributing
 
 Contributions are welcome! Feel free to submit issues and pull requests.
