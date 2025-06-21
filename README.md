@@ -11,6 +11,7 @@ A modern, interactive trivia quiz application built with React and Tailwind CSS.
 - 🏆 Local storage for top scores
 - 📱 Fully responsive design
 - ✨ Interactive feedback and fun facts
+- 🔄 No login required - start playing immediately!
 
 ## Technologies Used
 

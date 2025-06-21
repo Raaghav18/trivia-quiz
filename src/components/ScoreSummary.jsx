@@ -10,7 +10,7 @@ const getEncouragingMessage = (score, totalQuestions) => {
   return "Hey, every expert was once a beginner! Try again! 💪";
 };
 
-const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onReturnHome, username }) => {
+const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onReturnHome }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -18,7 +18,7 @@ const ScoreSummary = ({ score, correctAnswers, totalQuestions, onRestart, onRetu
       className="card-container text-alignment"
     >
       <h2 className="main-heading mb-4">Quiz Complete!</h2>
-      <p className="score-text mb-2">Great job, {username}!</p>
+      <p className="score-text mb-2">Great job, Player!</p>
       <p className="score-text mb-8">
         You scored {score} points with {correctAnswers} correct answers out of {totalQuestions} questions.
       </p>
